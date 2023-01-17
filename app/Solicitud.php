@@ -23,6 +23,10 @@ class Solicitud extends Model
         return $this->hasOne(User::class, 'id', 'users_id');
     }
 
+    public function personal (){
+        return $this->hasOne(Personal::class, 'id', 'personals_id');
+    }
+
     public function producto (){
         return $this->hasOne(Producto::class, 'id', 'producto_id');
     }

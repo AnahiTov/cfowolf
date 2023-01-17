@@ -110,6 +110,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::delete('clientes/deleteCliente/{id}', 'ClienteAdminController@destroy')->name('deleteCliente');
     Route::get('clientes/validarClaveElector/{id}', 'ClienteAdminController@existeCliente');
     Route::get('clientes/cargaProspecto/{id}', 'ClienteAdminController@verProspecto')->name('verProspecto');
+    Route::get('clientes/cargaCliente/{id}', 'ClienteAdminController@verCliente')->name('verCliente');
     Route::put('clientes/{id}', 'ClienteAdminController@actualizarEstadoCliente');
     Route::post('clientes/addreferencias/{id}', 'ClienteAdminController@guardarReferencias')->name('addreferencias');
     Route::post('clientes/editRefer/{id}', 'ClienteAdminController@editarReferencias')->name('editRefer');
@@ -226,8 +227,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::get('colocacion/periodoSeg/{idProducto}', 'ColocacionController@verPeriodo')->name('verPeriodo');
     Route::post('colocacion/verMontosProducto/', 'ColocacionController@detallesMontoSeg')->name('detallesMontoSeg');
     Route::get('colocacion/montoSumaAseg/{idPrima}', 'ColocacionController@obtenerMonto');
+    Route::post('colocacion/addBeneficiarios/{id}', 'ColocacionController@guardarReferencias')->name('addBeneficiarios');
 
 
+    Route::post('colocacion/cargarPoliza', 'ColocacionController@guardarPoliza')->name('cargarPoliza');
 
 
 

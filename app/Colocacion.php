@@ -11,7 +11,7 @@ class Colocacion extends Model
 
     public function scopeName ($query, $name){
         if($name)
-        return $query->orWhereRaw("CONCAT(nombre, ' ', apellido_paterno, ' ', apellido_materno) LIKE '%$name%' ");
+        return $query->orWhereRaw("CONCAT(nombre, ' ',apellido_paterno, ' ',apellido_materno) LIKE '%$name%' ");
     }
 
     public function primaSuma (){
@@ -20,6 +20,10 @@ class Colocacion extends Model
 
     public function cliente (){
         return $this->hasOne(Cliente::class, 'id', 'clientes_id');
+    }
+
+    public function personal (){
+        return $this->hasOne(Personal::class, 'id', 'personals_id');
     }
 }
 

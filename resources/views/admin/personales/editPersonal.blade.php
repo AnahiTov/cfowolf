@@ -19,6 +19,22 @@
         @method('PUT')	
         @csrf
         <div class="card-body">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="txt_sucursal_ruta" class="">Sucursal</label>
+                    <select type="select" id="txt_sucursal_ruta" name="txt_sucursal_ruta" class="form-control select2 " required>
+                        <option value="">Seleccionar</option>
+                        @foreach($rutas as $ruta)
+                            <option {{ old('txt_sucursal_ruta') == $ruta->id ? 'selected' : ($opcionSucursal != "N/A" ? ($opcionSucursal == $ruta->id ? 'selected' : '')  : '') }} value="{{$ruta->id}}">{{$ruta->nombre_ruta}}</option>
+                        @endforeach
+                    </select>
+                    @error('userType')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
             <div class="d-flex justify-content-start">
                 <div class="col-sm-4">
                     <div class="form-group">
@@ -177,7 +193,7 @@
                 </div>
                 {{-- <div class="col-sm-3">
                     <div class="form-group">
-                        <label for="txt_puesto">Puesto</label>
+                        <label for="txt_sucursal_ruta">Puesto</label>
                         <select class="form-control" id="txt_puesto" name="txt_puesto">
                             <option {{ $personal->puesto == 'SOCIO FUNDADOR' ? 'selected' : ''}} value="SOCIO FUNDADOR">Socio Fundador</option>
                             <option {{ $personal->puesto == 'OPERADOR DE ASOCIADO' ? 'selected' : ''}} value="OPERADOR DE ASOCIADO">Operador de Asociado</option>
@@ -434,6 +450,10 @@
     })
 
     $("#txt_puesto").select2({
+        theme:"bootstrap4"
+    });
+    
+    $("#txt_sucursal_ruta").select2({
         theme:"bootstrap4"
     });
     

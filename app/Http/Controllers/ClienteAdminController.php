@@ -88,6 +88,7 @@ class ClienteAdminController extends Controller
         $cliente->religion = mb_strtoupper($request->input('txt_religion'), 'UTF-8');
         $cliente->estado_civil = mb_strtoupper($request->input('txt_estado_civil'), 'UTF-8');
         $cliente->clave_elector = mb_strtoupper($request->input('txt_clave_elector'), 'UTF-8');
+        $cliente->pasaporte = mb_strtoupper($request->input('txt_pasaporte'), 'UTF-8');
         $cliente->anio_vencimiento_ine = $request->input('txt_vencimiento_ine');
         $cliente->folio_ine = mb_strtoupper($request->input('txt_folio_ine'), 'UTF-8');
         $cliente->ocr = mb_strtoupper($request->input('txt_ocr'), 'UTF-8');
@@ -175,6 +176,7 @@ class ClienteAdminController extends Controller
             'religion' => mb_strtoupper($request->txt_religion,'UTF-8'),
             'estado_civil' => mb_strtoupper($request->txt_estado_civil,'UTF-8'),
             'clave_elector' => mb_strtoupper($request->txt_clave_elector,'UTF-8'),
+            'pasaporte' => mb_strtoupper($request->txt_pasaporte,'UTF-8'),
             'anio_vencimiento_ine' => mb_strtoupper($request->txt_vencimiento_ine,'UTF-8'),
             'folio_ine' => mb_strtoupper($request->txt_folio_ine,'UTF-8'),
             'ocr' => mb_strtoupper($request->txt_ocr,'UTF-8'),
@@ -209,6 +211,11 @@ class ClienteAdminController extends Controller
 
     public function verProspecto($id){
         $prospectos = Prospecto::where('id', $id)->first();
+        return response()->json(["prospectos" => $prospectos]);
+    }
+
+    public function verCliente($id){
+        $prospectos = Cliente::where('id', $id)->first();
         return response()->json(["prospectos" => $prospectos]);
     }
 
@@ -336,7 +343,8 @@ class ClienteAdminController extends Controller
                 $cliente->religion = mb_strtoupper($array2['religion'], 'UTF-8');
                 $cliente->estado_civil = mb_strtoupper($array2['estado_civil'], 'UTF-8');
                 $cliente->clave_elector = mb_strtoupper($array2['clave_elector'], 'UTF-8');
-                $cliente->anio_vencimiento_ine = mb_strtoupper($array2['anio_vencimiento_ine'], 'UTF-8');
+                $cliente->clave_elector = mb_strtoupper($array2['clave_elector'], 'UTF-8');
+                $cliente->pasaporte = mb_strtoupper($array2['pasaporte'], 'UTF-8');
                 $cliente->folio_ine = mb_strtoupper($array2['folio_ine'], 'UTF-8');
                 $cliente->ocr = mb_strtoupper($array2['ocr'], 'UTF-8');
                 $cliente->numero_tarjeta = $array2['numero_tarjeta'];

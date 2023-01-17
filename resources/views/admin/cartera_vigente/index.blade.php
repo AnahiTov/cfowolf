@@ -21,6 +21,27 @@
                     </div>
                 </div>
             </form>
+            <div class="form-group float-right">
+                <div class="d-flex">
+                    <form action="{{ route('admin.cartera_vigente.index') }}">
+                        @csrf
+                        <input type="hidden" id="estatus" name="estatus" value="Pendiente">
+                        <button type="submit" class="btn btn-app">
+                            <span class="badge bg-warning">{{$statePendiente->count()}}</span>
+                            <i class="fas fa-ban"></i> Pendiente
+                        </button>
+                    </form>
+                    
+                    <form action="{{ route('admin.cartera_vigente.index') }}">
+                        @csrf
+                        <input type="hidden" id="estatus" name="estatus" value="Desembolsado">
+                        <button type="submit" class="btn btn-app">
+                            <span class="badge bg-success">{{$stateDsembolsado->count()}}</span>
+                            <i class="fas fa-check-circle"></i> Desembolsado
+                        </button>
+                    </form>
+                </div>
+            </div>
             <table class="table table-striped projects">
                 <thead>
                     <tr>

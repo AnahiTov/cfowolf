@@ -12,7 +12,22 @@
         <form method="POST" action="{{ route('admin.addpersonal') }}" autocomplete="off">
             @csrf
         <div class="card-body">
-            
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="txt_sucursal_ruta" class="">Sucursal</label>
+                    <select type="select" id="txt_sucursal_ruta" name="txt_sucursal_ruta" class="form-control select2 ">
+                        <option value="">Selecciona</option>
+                        @foreach($rutas as $ruta)
+                            <option {{ old('txt_sucursal_ruta') == $ruta->id ? 'selected' : '' }} value="{{$ruta->id}}">{{$ruta->nombre_ruta}}</option>
+                        @endforeach
+                    </select>
+                    @error('userType')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
             <div class="d-flex justify-content-start">
                 <div class="col-sm-4">
                     <div class="form-group">
@@ -428,6 +443,9 @@
     })
 
     $("#txt_puesto").select2({
+        theme:"bootstrap4"
+    });
+    $("#txt_sucursal_ruta").select2({
         theme:"bootstrap4"
     });
     

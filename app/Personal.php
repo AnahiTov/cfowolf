@@ -32,6 +32,10 @@ class Personal extends Model
         return $this->hasOne(EstadoNacimiento::class, 'clave', 'estados_nacimientos_id');
     }
 
+    public function sucursal (){
+        return $this->hasOne(SucursalRuta::class, 'id', 'sucursales_id');
+    }
+
     public function scopeName ($query, $name){
         if($name)
         // return $query->where('nombre','LIKE', "%$name%");

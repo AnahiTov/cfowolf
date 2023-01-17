@@ -117,6 +117,12 @@
                                 <input type="text" id="txt_curp" name="txt_curp" class="form-control text-uppercase" placeholder="CURP" value="{{ $cliente->curp}}" maxlength="18">
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txt_pasaporte">Pasaporte</label>
+                                <input type="text" id="txt_pasaporte" name="txt_pasaporte" class="form-control text-uppercase" placeholder="Pasaporte" value="{{ $cliente->pasaporte}}"  maxlength="15">
+                            </div>
+                        </div>
                     </div>
                     <div class="d-flex justify-content-start">
                         <div class="col-sm-2">
@@ -283,7 +289,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="txt_clave_elector">Clave de Elector</label>
-                                <input type="text" id="txt_clave_elector" name="txt_clave_elector" class="form-control text-uppercase" placeholder="Clave de Elector" value="{{ $cliente->clave_elector}}"  maxlength="18" required onchange="validarClaveElector()">
+                                <input type="text" id="txt_clave_elector" name="txt_clave_elector" class="form-control text-uppercase" placeholder="Clave de Elector" value="{{ $cliente->clave_elector}}"  maxlength="18" onchange="validarClaveElector()">
                             </div>
                             <small id="msjValidacion" class="text-danger"></small>
                         </div>
@@ -336,7 +342,7 @@
                         <div class="col-sm-5">
                             <div class="form-group">
                                 <label for="txt_cuenta" class="">Cuenta Contable del Producto</label>
-                                <select type="select" id="txt_cuenta" name="txt_cuenta" class="form-control select2 " required>
+                                <select type="select" id="txt_cuenta" name="txt_cuenta" class="form-control select2 ">
                                     <option value="">Seleccionar</option>
                                     @foreach($cuentas as $cuenta)
                                         <option {{ old('txt_cuenta') == $cuenta->id ? 'selected' : ($opcionCuenta != "N/A" ? ($opcionCuenta == $cuenta->id ? 'selected' : '')  : '') }} value="{{$cuenta->id}}">{{$cuenta->nombre_cuenta}}</option>
@@ -363,7 +369,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txt_nombre_asociado" class="">Nombre Asociado</label>
-                                <select type="select" id="txt_nombre_asociado" name="txt_nombre_asociado" class="form-control select2 " required>
+                                <select type="select" id="txt_nombre_asociado" name="txt_nombre_asociado" class="form-control select2 ">
                                     <option value="">Seleccionar</option>
                                     @foreach($asociados as $asociado)
                                         <option {{ old('txt_nombre_asociado') == $asociado->id ? 'selected' : ($personAsociado != "N/A" ? ($personAsociado == $asociado->id ? 'selected' : '')  : '') }} value="{{$asociado->id}}">{{$asociado->getFullname()}}</option>
@@ -379,7 +385,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txt_nombre_aval" class="">Nombre Aval</label>
-                                <select type="select" id="txt_nombre_aval" name="txt_nombre_aval" class="form-control select2 " required>
+                                <select type="select" id="txt_nombre_aval" name="txt_nombre_aval" class="form-control select2 ">
                                     <option value="">Seleccionar</option>
                                     @foreach($avales as $aval)
                                         <option {{ old('txt_nombre_aval') == $aval->id ? 'selected' : ($personAval != "N/A" ? ($personAval == $aval->id ? 'selected' : '')  : '') }} value="{{$aval->id}}">{{$aval->getFullname()}}</option>

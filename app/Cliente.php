@@ -38,4 +38,5 @@ class Cliente extends Model
         if($name)
         return $query->orWhereRaw("CONCAT(nombre, ' ', apellido_paterno, ' ', apellido_materno) LIKE '%$name%' ");
     }
+    
 }

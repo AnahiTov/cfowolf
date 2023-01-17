@@ -6,6 +6,7 @@ use App\Personal;
 use App\Puesto;
 use App\HistorialBaja;
 use App\EstadoNacimiento;
+use App\SucursalRuta;
 use DateTime;
 use Carbon\Carbon;
 
@@ -42,7 +43,9 @@ class PersonalAdminController extends Controller
     {
         $puestos = Puesto::all();
         $estados_nac = EstadoNacimiento::all();
-        return view('admin.personales.addPersonal', compact('puestos','estados_nac'));
+        $rutas = SucursalRuta::where('state','Activo')->get();
+
+        return view('admin.personales.addPersonal', compact('puestos','estados_nac','rutas'));
 
     }
 
@@ -55,6 +58,7 @@ class PersonalAdminController extends Controller
         $personal->apellido_materno = mb_strtoupper($request->input('txt_apellido_materno'), 'UTF-8');
         $personal->fecha_nacimiento = $request->input('txt_fecha_nac');
         $personal->edad = $request->input('txt_edad');
+        $personal->sucursales_id = $request->input('txt_sucursal_ruta');
         $personal->genero = $request->input('txt_genero');
         $personal->ciudad_nacimiento = mb_strtoupper($request->input('txt_ciudad_nacimiento'), 'UTF-8');
         $personal->nacionalidad = mb_strtoupper($request->input('txt_nacionalidad'), 'UTF-8');
@@ -119,13 +123,19 @@ class PersonalAdminController extends Controller
             $opcionPuesto = $personal->puestoid()->first('id')->id;
         }
 
+        $rutas = SucursalRuta::where('state','Activo')->get();
+        $opcionSucursal = "N/A";
+        if($personal->sucursal()->first('id') != null){
+            $opcionSucursal = $personal->sucursal()->first('id')->id;
+        }
+
         $estados_nac = EstadoNacimiento::all(); 
         $opcionEstado = "N/A";
         if($personal->estadoNac()->first('clave') != null){
             $opcionEstado = $personal->estadoNac()->first('clave')->clave;
         }
 
-        return view('admin.personales.editPersonal', compact('personal','puestos','opcionPuesto','opcionEstado','estados_nac'));
+        return view('admin.personales.editPersonal', compact('personal','puestos','opcionPuesto','opcionEstado','estados_nac','rutas','opcionSucursal'));
     }
 
     public function update(Request $request, $id)
@@ -137,6 +147,7 @@ class PersonalAdminController extends Controller
             'fecha_nacimiento' => $request->txt_fecha_nac,
             'edad' => $request->txt_edad,
             'genero' => $request->txt_genero,
+            'sucursales_id' => $request->txt_sucursal_ruta,
             'ciudad_nacimiento' => mb_strtoupper($request->txt_ciudad_nacimiento,'UTF-8'),
             'nacionalidad' => mb_strtoupper($request->txt_nacionalidad, 'UTF-8'),
             'estados_nacimientos_id' => $request->txt_estado_nacimiento,
