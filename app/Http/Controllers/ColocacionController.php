@@ -27,19 +27,31 @@ class ColocacionController extends Controller
             ->join('clientes', 'clientes.id', '=', 'solicitudseguros.clientes_id')
             ->leftjoin('archivos', 'archivos.solicitudseguros_id', '=', 'solicitudseguros.id')
             ->paginate(10);
-        }else{
+        }else if($name){
             $solicitudes = Colocacion::select('solicitudseguros.*')
             ->name($name)
             ->join('clientes', 'clientes.id', '=', 'solicitudseguros.clientes_id')
             ->leftjoin('archivos', 'archivos.solicitudseguros_id', '=', 'solicitudseguros.id')
             ->paginate(10);
+        }else{
+            $solicitudes = Colocacion::select('solicitudseguros.*')
+            ->name($name)
+            ->join('clientes', 'clientes.id', '=', 'solicitudseguros.clientes_id')
+            ->leftjoin('archivos', 'archivos.solicitudseguros_id', '=', 'solicitudseguros.id')
+            ->where('solicitudseguros.estado_solseg', 'Pendiente')
+            ->paginate(10);
         }
 
       
+        $statePendiente = Colocacion::where('estado_solseg', 'Pendiente')->get();
+        $stateProceso = Colocacion::where('estado_solseg', 'Proceso')->get();
+        $stateTerminado = Colocacion::where('estado_solseg', 'Terminado')->get();
+
+
         $productoSeg = ProductosSeg::all(); 
            
 
-        return view('admin.colocacion.index', compact('solicitudes','name','productoSeg'));
+        return view('admin.colocacion.index', compact('solicitudes','name','productoSeg','statePendiente','stateProceso','stateTerminado'));
     }
 
 
@@ -57,7 +69,7 @@ class ColocacionController extends Controller
         // $solicitud = Colocacion::where('id', $id)->first();
 
         // dd($id);
-        $solicitud = Colocacion::select('solicitudseguros.*','archivos.ine')->where('solicitudseguros.id', $id)
+        $solicitud = Colocacion::select('solicitudseguros.*','archivos.ine','archivos.poliza')->where('solicitudseguros.id', $id)
         ->join('clientes', 'clientes.id', '=', 'solicitudseguros.clientes_id')
         ->leftjoin('archivos', 'archivos.solicitudseguros_id', '=', 'solicitudseguros.id')
         ->first();
@@ -68,7 +80,8 @@ class ColocacionController extends Controller
             $selectProducto = $solicitud->primaSuma->productoSolicitud()->first('id')->id;
         }
         
-        $periodos = primaSuma::select('periodo.*')
+        \DB::statement("SET SQL_MODE=''");
+        $periodos = PrimaSuma::select('periodo.*')
         ->join('periodo', 'periodo.id', '=', 'primas_sumas.periodo_id')
         ->groupBy('periodo_id')
         ->get();

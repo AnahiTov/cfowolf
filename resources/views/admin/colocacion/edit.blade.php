@@ -61,7 +61,22 @@
                                                 @endif
                                             @endif
                                         </td>
-                                      <td><img src="{{ asset('img/contract.png') }}" style="width:30px;height:30px;" title="Sin documento" alt=""></td>
+                                        <td>
+                                            @if ($solicitud->poliza == '')
+                                                <img src="{{ asset('img/contract.png') }}" style="width:30px;height:30px;" title="Sin documento" alt="">
+                                            @else
+                                                @php 
+                                                    $extPoliza = explode('.', $solicitud->poliza);
+                                                @endphp
+
+                                                
+                                                @if($extPoliza[1] == 'pdf')
+                                                    <a target="_blank" href="{{asset($solicitud->poliza)}}"><img id="logo" src="{{ asset('img/contract.png') }}" style="width:30px;height:30px;cursor: pointer" ></a>
+                                                @else
+                                                    <img src="{{ asset('img/id-card.png') }}" style="width:30px;height:30px;cursor: pointer" onclick="verIneBenefToc('{{ $solicitud->poliza }}')" title="Click para ver INE" alt="">
+                                                @endif
+                                            @endif
+                                        </td>
                                       <td><img src="{{ asset('img/ban.png') }}" style="width:30px;height:30px;" title="Sin documento" alt=""></td>
                                      
                                     </tbody>

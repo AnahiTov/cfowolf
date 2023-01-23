@@ -23,9 +23,9 @@
                     </div>
                 </div>
             </form>
-            {{-- <div class="form-group float-right">
+            <div class="form-group float-right">
                 <div class="d-flex">
-                    <form action="{{ route('admin.solicitud.index') }}">
+                    <form action="{{ route('admin.colocacion.index') }}">
                         @csrf
                         <input type="hidden" id="estatus" name="estatus" value="Pendiente">
                         <button type="submit" class="btn btn-app">
@@ -33,7 +33,7 @@
                             <i class="fas fa-ban"></i> Pendiente
                         </button>
                     </form>
-                    <form action="{{ route('admin.solicitud.index') }}">
+                    <form action="{{ route('admin.colocacion.index') }}">
                         @csrf
                         <input type="hidden" id="estatus" name="estatus" value="Proceso">
                         <button type="submit" class="btn btn-app">
@@ -41,16 +41,16 @@
                             <i class="fas fa-sync fa-spin"></i> Proceso
                         </button>
                     </form>
-                    <form action="{{ route('admin.solicitud.index') }}">
+                    <form action="{{ route('admin.colocacion.index') }}">
                         @csrf
-                        <input type="hidden" id="estatus" name="estatus" value="Autorizado">
+                        <input type="hidden" id="estatus" name="estatus" value="Terminado">
                         <button type="submit" class="btn btn-app">
                             <span class="badge bg-success">{{$stateTerminado->count()}}</span>
-                            <i class="fas fa-check-circle"></i> Autorizado
+                            <i class="fas fa-check-circle"></i> Terminado
                         </button>
                     </form>
                 </div>
-            </div> --}}
+            </div>
             <table class="table table-striped projects">
                 <thead>
                     <tr>

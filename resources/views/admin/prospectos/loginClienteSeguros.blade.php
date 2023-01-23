@@ -191,8 +191,8 @@
                                 <img class="rounded-circle mx-auto d-block m-2 logo" style="width: 25%;" src="{{ asset('img/lobo1.jpg') }}" alt="Logo">
                                 <h5 class="card-title my-3">BIENVENIDO</h5>
                             </div>
-                            <p class="card-text mx-5">Con el fin de mejorar nuestra atención a nuestros clientes, podras realizar tu solicitud de crédito, esperamos que puedas responderla de la manera más sincera posible.</p>
-                            <p class="card-text"><small class="text-muted">¡Gracias por confiar en CFOWOLF!</small></p>
+                            <p class="card-text mx-5">Con el fin de mejorar nuestra atención, podras realizar tu solicitud por este medio, esperamos que puedas responderla de la manera más sincera posible.</p>
+                            <p class="card-text"><small class="text-muted">¡Gracias por confiar en RED DE APOYO BINACIONAL!</small></p>
                         </div>
                         </div>
                     </div>
